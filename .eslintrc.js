@@ -17,7 +17,6 @@ module.exports = {
     'prettier/prettier': 'erro',
     'class-methods-use-this': 'off',
     'no-param-reassing': 'off',
-    camelcase: 'off',
-    'no-unesed-vars': ['error', { argsIgnorePattern: 'next' }],
+    'no-unused-vars': ['error', { argsIgnorePattern: 'next' }],
   },
 };
