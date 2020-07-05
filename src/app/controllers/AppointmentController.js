@@ -27,8 +27,17 @@ class AppointmentController {
         .status(401)
         .json({ error: 'You can only create appointments with providers' });
     }
+    try {
+      const appointment = await Appointment.create({
+        user_id: req.userId,
+        provider_id,
+        date,
+      });
 
-    return res.json();
+      return res.json(appointment);
+    } catch (error) {
+      console.error('Erro:', error);
+    }
   }
 }
 
