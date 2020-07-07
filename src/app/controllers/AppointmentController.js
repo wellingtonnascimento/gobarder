@@ -6,31 +6,31 @@ import Appointment from '../models/Appointment';
 
 class AppointmentController {
   async index(req, res) {
-    try {
-      const appointment = await Appointment.findAll({
-        where: { user_id: req.userId, canceled_at: null },
-        order: ['date'],
-        attributes: ['id', 'date'],
-        include: [
-          {
-            model: User,
-            as: 'provider',
-            attributes: ['id', 'name'],
-            include: [
-              {
-                model: File,
-                as: 'avatar',
-                attributes: ['id', 'path', 'url'],
-              },
-            ],
-          },
-        ],
-      });
+    const { page = 1 } = req.query;
 
-      return res.json(appointment);
-    } catch (error) {
-      console.log(error);
-    }
+    const appointment = await Appointment.findAll({
+      where: { user_id: req.userId, canceled_at: null },
+      order: ['date'],
+      limit: 20,
+      offset: (page - 1) * 20,
+      attributes: ['id', 'date'],
+      include: [
+        {
+          model: User,
+          as: 'provider',
+          attributes: ['id', 'name'],
+          include: [
+            {
+              model: File,
+              as: 'avatar',
+              attributes: ['id', 'path', 'url'],
+            },
+          ],
+        },
+      ],
+    });
+
+    return res.json(appointment);
   }
 
   async store(req, res) {
