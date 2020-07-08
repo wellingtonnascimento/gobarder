@@ -45,7 +45,7 @@ class AppointmentController {
       return res.status(400).json({ error: 'Validation fails' });
     }
 
-    const { provider_id, date } = req.body;
+    const { user_id, provider_id, date } = req.body;
 
     /**
      * Check if provider_id is a
@@ -58,6 +58,11 @@ class AppointmentController {
       return res
         .status(401)
         .json({ error: 'You can only create appointments with providers' });
+    }
+    if (req.userId === provider_id) {
+      return res
+        .status(401)
+        .json({ error: 'You can not create appointments with yourself.' });
     }
 
     const hourStrat = startOfHour(parseISO(date));
