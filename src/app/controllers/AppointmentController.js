@@ -119,6 +119,12 @@ class AppointmentController {
       console.error('Erro:', error);
     }
   }
+
+  async delete(req, res) {
+    const appointment = await Appointment.findByPk(req.parms.id);
+
+    return res.json();
+  }
 }
 
 export default new AppointmentController();
