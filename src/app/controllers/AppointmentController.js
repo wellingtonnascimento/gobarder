@@ -121,7 +121,7 @@ class AppointmentController {
   }
 
   async delete(req, res) {
-    const appointment = await Appointment.findByPk(req.parms.id);
+    const appointment = await Appointment.findByPk(req.params.id);
 
     if (appointment.user_id !== req.userId) {
       return res.status(401).json({
@@ -137,7 +137,11 @@ class AppointmentController {
       });
     }
 
-    return res.json();
+    appointment.canceled_at = new Date();
+
+    await appointment.save();
+
+    return res.json(appointment);
   }
 }
 
