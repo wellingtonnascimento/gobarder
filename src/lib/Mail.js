@@ -1,7 +1,7 @@
 import nodemailer from 'nodemailer';
-import { resolve } from 'path';
 import exphbs from 'express-handlebars';
 import nodemailerhbs from 'nodemailer-express-handlebars';
+import { resolve } from 'path';
 import mailConfig from '../config/mail';
 
 class Mail {
@@ -20,7 +20,6 @@ class Mail {
 
   configureTamplates() {
     const viewPath = resolve(__dirname, '..', 'app', 'views', 'emails');
-
     this.transporter.use(
       'compile',
       nodemailerhbs({
@@ -30,6 +29,8 @@ class Mail {
           defaultLayout: 'default',
           extname: '.hbs',
         }),
+        viewPath,
+        extName: '.hbs',
       })
     );
   }
