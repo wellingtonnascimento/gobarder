@@ -23,7 +23,7 @@ class Queue {
   }
 
   add(queue, job) {
-    return this.queues[queue].bee.crateJob(job).save();
+    return this.queues[queue].bee.createJob(job).save();
   }
 
   processQueue() {
