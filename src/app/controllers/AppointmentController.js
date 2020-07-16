@@ -68,12 +68,12 @@ class AppointmentController {
         .json({ error: 'You can not create appointments with yourself.' });
     }
 
-    const hourStrat = startOfHour(parseISO(date));
+    const hourStart = startOfHour(parseISO(date));
 
     /**
      * Check for past dates
      */
-    if (isBefore(hourStrat, new Date())) {
+    if (isBefore(hourStart, new Date())) {
       return res.status(400).json({ error: 'Past dates are not permitted' });
     }
 
@@ -81,15 +81,15 @@ class AppointmentController {
      * Check date availability
      */
 
-    const checkAvailabitity = await Appointment.findOne({
+    const checkAvailability = await Appointment.findOne({
       where: {
         provider_id,
         canceled_at: null,
-        date: hourStrat,
+        date: hourStart,
       },
     });
 
-    if (checkAvailabitity) {
+    if (checkAvailability) {
       return res
         .status(400)
         .json({ error: 'Appointment date is not available' });
@@ -107,7 +107,7 @@ class AppointmentController {
        */
       const user = await User.findByPk(req.userId);
       const formattedDate = format(
-        hourStrat,
+        hourStart,
         "'dia' dd 'de' MMM', ás' H:mm'h'",
         { locale: pt }
       );
