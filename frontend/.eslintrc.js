@@ -30,7 +30,7 @@ module.exports = {
     'react/static-property-placement': 'off',
     'react/jsx-props-no-spreading': 'off',
     'react/prop-types': 'off',
-    'no-param-reassing': 'off',
+    'no-param-reassign': 'off',
     'no-console': ['error', { allow: ['tron'] }],
     'react-hooks/rules-of-hooks': 'error',
     'react-hooks/exhaustive-deps': 'warn',
