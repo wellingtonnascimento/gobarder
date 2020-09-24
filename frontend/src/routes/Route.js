@@ -9,7 +9,7 @@ import { store } from '../store';
 
 export default function RouteWrapper({
   component: Component,
-  isPrivate,
+  isPrivate = false,
   ...rest
 }) {
   const { signed } = store.getState().auth;
