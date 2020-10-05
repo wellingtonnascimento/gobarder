@@ -25,16 +25,14 @@ export default function RouteWrapper({
   const Layout = signed ? DefaultLayout : AuthLayout;
 
   return (
-    <>
-      <Route
-        {...rest}
-        render={(props) => (
-          <Layout>
-            <Component {...props} />
-          </Layout>
-        )}
-      />
-    </>
+    <Route
+      {...rest}
+      render={(props) => (
+        <Layout>
+          <Component {...props} />
+        </Layout>
+      )}
+    />
   );
 }
 
