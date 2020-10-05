@@ -15,7 +15,7 @@ import {
 
 export default function Notifications() {
   const [visible, setVisible] = useState(false);
-  const [notifications, setNotifications] = useState([false]);
+  const [notifications, setNotifications] = useState([]);
 
   const hasUnread = useMemo(
     () => !!notifications.find((notification) => notification.read === false),
@@ -25,7 +25,6 @@ export default function Notifications() {
   useEffect(() => {
     async function loadNotifications() {
       const response = await api.get('notifications');
-
       const data = response.data.map((notification) => ({
         ...notification,
         timeDistance: formatDistance(
@@ -37,6 +36,7 @@ export default function Notifications() {
 
       setNotifications(data);
     }
+
     loadNotifications();
   }, []);
 
@@ -49,7 +49,9 @@ export default function Notifications() {
 
     setNotifications(
       notifications.map((notification) =>
-        notification._id ? { ...notification, read: true } : notification,
+        notification._id === id
+          ? { ...notification, read: true }
+          : notification,
       ),
     );
   }
