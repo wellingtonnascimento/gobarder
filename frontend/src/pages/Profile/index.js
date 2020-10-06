@@ -36,7 +36,7 @@ export default function Profile() {
           placeholder="Confirmação de Senha"
         />
 
-        <button type="submit"> Atualizar perfil</button>
+        <button type="submit">Atualizar perfil</button>
       </Form>
 
       <button type="button">Sair do GoBarber</button>
